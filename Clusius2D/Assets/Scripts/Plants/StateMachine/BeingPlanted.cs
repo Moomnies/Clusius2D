@@ -10,7 +10,7 @@ public class BeingPlanted : MonoBehaviour, IState
 
     PlantStateMachine plantReference;   
 
-    public BeingPlanted(Sprite meshFilter, PlantStateMachine plantReference)
+    public BeingPlanted(SpriteRenderer meshFilter, PlantStateMachine plantReference)
     {        
         this.plantReference = plantReference;     
     }
@@ -37,7 +37,5 @@ public class BeingPlanted : MonoBehaviour, IState
     public void OnExit()
     {
            
-    }
-
-   
+    }   
 }

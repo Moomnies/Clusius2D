@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class Digging : MonoBehaviour, IState
 {
-    Sprite dirtSprite;
+    SpriteRenderer dirtSprite;
 
     bool holeIsDug = false;
 
     public bool IsHoleDug { get => holeIsDug; }
 
-    public Digging(Sprite meshFilter)
+    public Digging(SpriteRenderer spriteRenderer)
     {
-        //Set Sprite to Sprite in Constructor
+        dirtSprite = spriteRenderer;
     }
 
     public void OnEnter()

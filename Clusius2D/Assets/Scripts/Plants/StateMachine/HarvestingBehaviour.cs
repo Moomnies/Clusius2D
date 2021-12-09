@@ -26,8 +26,7 @@ public class HarvestingBehaviour : MonoBehaviour, IState
     public void OnEnter()
     {
         harvested = false;
-        seed = plantReference.PlantedSeed;
-        plantReference.FruitSpawn.SetActive(true);
+        seed = plantReference.PlantedSeed;        
     }
 
     public void Tick()
@@ -36,8 +35,7 @@ public class HarvestingBehaviour : MonoBehaviour, IState
     }
 
     public void OnExit()
-    {
-        plantReference.FruitSpawn.SetActive(false);
+    {     
         harvested = false;        
         plantReference.ResetPlant();
     }

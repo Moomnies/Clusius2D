@@ -11,10 +11,10 @@ public class PlantStateMachine : MonoBehaviour
     Seed _PlantedSeed = null;
 
     [Header("Assign First Please")]
-    [SerializeField] Sprite meshFilter;
+    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] TimerScript timer;
-    [SerializeField] GameObject fruitSpawn;
-    [SerializeField] Sprite startMesh;
+    //[SerializeField] GameObject fruitSpawn;
+    [SerializeField] Sprite startSprite;
 
     [Header("DEBUG MODE")]
     [SerializeField] bool debugMode; 
@@ -22,15 +22,15 @@ public class PlantStateMachine : MonoBehaviour
     public IState currentPlantState { get => _StateMachine.GetCurrentState(); }
     public Seed PlantedSeed { get => _PlantedSeed; set => _PlantedSeed = value; }
     public TimerScript Timer { get => timer; set => timer = value; }
-    public GameObject FruitSpawn { get => fruitSpawn; set => fruitSpawn = value; }
+    //public GameObject FruitSpawn { get => fruitSpawn; set => fruitSpawn = value; }
 
     private void Awake()
     {       
         _StateMachine = new StateMachine(debugMode);
 
-        var digging = new Digging(meshFilter);
-        var beingPlanted = new BeingPlanted(meshFilter, this);
-        var growing = new Growing(this, Timer, meshFilter);
+        var digging = new Digging(spriteRenderer);
+        var beingPlanted = new BeingPlanted(spriteRenderer, this);
+        var growing = new Growing(this, Timer, spriteRenderer);
         var harvestingB = new HarvestingBehaviour(Timer, this);
 
         void At(IState to, IState from, Func<bool> condition) => _StateMachine.AddTransition(to, from, condition);
@@ -52,6 +52,7 @@ public class PlantStateMachine : MonoBehaviour
     {
         plantID = Guid.NewGuid().ToString();
         FarmManager.AddMeToManager(this);
+        startSprite = spriteRenderer.sprite;
     }
 
     public void ExecuteBehaviourOnClick() => _StateMachine.Tick();  
@@ -59,6 +60,6 @@ public class PlantStateMachine : MonoBehaviour
     public void ResetPlant()
     {
         PlantedSeed = null;
-        meshFilter = startMesh;
+        spriteRenderer.sprite = startSprite;
     }
 }

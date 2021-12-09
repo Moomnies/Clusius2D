@@ -35,7 +35,6 @@ public static class FarmManager
         {           
             _PlantInScene[plantID].PlantedSeed = selectedPlant;
 
-
             //Execute StateMachine Tick so Behaviour is Switched to Growing. Needs to be done here because PlayerNeedToSelectAPlant is an Event. 
             _PlantInScene[plantID].ExecuteBehaviourOnClick();
         }

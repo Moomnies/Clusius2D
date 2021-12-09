@@ -9,7 +9,7 @@ public class Growing : MonoBehaviour, IState
     TimerScript timer;
 
     Sprite[] plantMeshes;
-    Sprite thisPlantsMesh;
+    SpriteRenderer spriteRenderer;
     int orderInPlantMeshes;    
 
     bool plantIsDoneGrowing;
@@ -17,11 +17,11 @@ public class Growing : MonoBehaviour, IState
     IEnumerator courtine;
     public bool PlantIsDoneGrowing { get => plantIsDoneGrowing; }
 
-    public Growing(PlantStateMachine plantStateMachine, TimerScript timer, Sprite thisPlantsMesh)
+    public Growing(PlantStateMachine plantStateMachine, TimerScript timer, SpriteRenderer thisSpriteRenderer)
     {
         plantState = plantStateMachine;
         this.timer = timer;
-        //Set Sprite here
+        spriteRenderer = thisSpriteRenderer;
     }   
 
     public void OnEnter()
@@ -35,20 +35,8 @@ public class Growing : MonoBehaviour, IState
             timer.SetTimerValue(seedPlanted.TimeToGrow);
             timer.ToggleOnOffTimmer();
             timer.onTimerRunOut += NextPlantStage;            
-        }
-        else { Debug.LogFormat("GROWING.TICK(): Timer is null! Timer: {0} In Plant: {1}", timer, plantState.GetID); }
-
-        if(seedPlanted.PlantModels != null)
-        {
-            plantMeshes = new Sprite[seedPlanted.PlantModels.Length];
-
-            for (int i = 0; i < plantMeshes.Length; i++)
-            {                
-                //plantMeshes[i] = seedPlanted.PlantModels[i]; => Convert to Sprite
-            }
-            
-            thisPlantsMesh = plantMeshes[orderInPlantMeshes];
-        }        
+        }        else { Debug.LogFormat("GROWING.TICK(): Timer is null! Timer: {0} In Plant: {1}", timer, plantState.GetID); }
+       
     }
 
     public void OnExit()
@@ -71,6 +59,6 @@ public class Growing : MonoBehaviour, IState
         }
 
         orderInPlantMeshes++;
-        thisPlantsMesh = plantMeshes[orderInPlantMeshes];
+        //thisPlantsMesh = plantMeshes[orderInPlantMeshes];
     }   
 }
