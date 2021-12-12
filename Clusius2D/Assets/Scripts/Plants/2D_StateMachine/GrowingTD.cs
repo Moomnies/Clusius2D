@@ -12,9 +12,10 @@ public class GrowingTD : MonoBehaviour, IState
 
     int orderInPlantStage;
 
-    public GrowingTD(PlantStateTD plantStateMachine)
+    public GrowingTD(PlantStateTD plantStateMachine, TimerScript timer)
     {
         stateMachine = plantStateMachine;
+        plantTimer = timer;
     }
 
     public void OnEnter()
@@ -24,7 +25,8 @@ public class GrowingTD : MonoBehaviour, IState
         if(plantTimer != null)
         {
             plantTimer.SetTimerValue(plantedSeed.TimeToGrow);
-            plantTimer.ToggleOnOffTimmer();               
+            plantTimer.ToggleOnOffTimmer();
+            plantTimer.onTimerRunOut += NextPlantStage;
         }
         else { Debug.LogFormat("GROWING.TICK(): Timer is null! Timer: {0} In Plant: {1}", plantTimer, stateMachine.GetPlantId); }
 

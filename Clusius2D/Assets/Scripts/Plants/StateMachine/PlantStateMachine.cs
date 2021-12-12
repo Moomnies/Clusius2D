@@ -51,7 +51,7 @@ public class PlantStateMachine : MonoBehaviour
     private void Start()
     {
         plantID = Guid.NewGuid().ToString();
-        FarmManager.AddMeToManager(this);
+        //FarmManager.AddMeToManager(this);
         startSprite = spriteRenderer.sprite;
     }
 

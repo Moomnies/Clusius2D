@@ -13,10 +13,7 @@ public class IdleTD : MonoBehaviour, IState
 
     public void OnEnter()
     {
-        if (stateMachine.GetPlantId != null)
-        {
-            FarmManager.PlayerNeedsToSelectPlant(stateMachine.GetPlantId);
-        }
+        
     }
 
     public void OnExit()
@@ -26,6 +23,9 @@ public class IdleTD : MonoBehaviour, IState
 
     public void Tick()
     {
-       
+        if (stateMachine.GetPlantId != null)
+        {
+            FarmManager.PlayerNeedsToSelectPlant(stateMachine.GetPlantId);
+        }
     }
 }

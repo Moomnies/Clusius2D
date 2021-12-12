@@ -12,6 +12,7 @@ public class TimerScript : MonoBehaviour
     bool timerIsRunning = false;
 
     float timeCount;
+    [SerializeField]
     float currentTimer;
 
     public float GetCurrentTimer { get => currentTimer; }

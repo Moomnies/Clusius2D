@@ -9,7 +9,7 @@ public static class FarmManager
 {    
     public static event Action<string> PlayerNeedToSelectAPlant;   
     
-    private static Dictionary<string, PlantStateMachine> _PlantInScene = new Dictionary<string, PlantStateMachine>();
+    private static Dictionary<string, PlantStateTD> _PlantInScene = new Dictionary<string, PlantStateTD>();
 
     private static GameObject plantInformationUI;
 
@@ -22,7 +22,7 @@ public static class FarmManager
 
     public static void PlayerNeedsToSelectPlant(string plantID)
     {
-        if (plantID != null && PlayerNeedToSelectAPlant != null)
+        if (plantID != null)
         {
             PlayerNeedToSelectAPlant(plantID);
         }
@@ -41,12 +41,12 @@ public static class FarmManager
         else { Debug.LogFormat("FARMMANAGER.SELECTEDPLANT(): Something is null! PlantID: {0}, SelectedPlant: {1}.", plantID, selectedPlant); }
     }
 
-    public static void AddMeToManager(PlantStateMachine plantToAdd)
+    public static void AddMeToManager(PlantStateTD plantToAdd)
     {
-        if (plantToAdd.GetComponent<PlantStateMachine>() && plantToAdd.GetID != null)
+        if (plantToAdd.GetComponent<PlantStateTD>() && plantToAdd.GetPlantId != null)
         {
-            _PlantInScene.Add(plantToAdd.GetID, plantToAdd);
-            Debug.Log("ADDED PLANT: " + plantToAdd.GetID);
+            _PlantInScene.Add(plantToAdd.GetPlantId, plantToAdd);
+            Debug.Log("ADDED PLANT: " + plantToAdd.GetPlantId);
         }
         else { Debug.LogFormat("FARMMANAGER.ADDMETOMANAGER(): Tried to add {0} to PlantsInSceneArray while this is not a plant", plantToAdd.name); }
     }  
@@ -99,7 +99,7 @@ public static class FarmManager
         }       
     }
 
-    private static void SetPlantData(PlantStateMachine currentPlant)
+    private static void SetPlantData(PlantStateTD currentPlant)
     {
         PlantInformationUI informationUI =  plantInformationUI.GetComponent<PlantInformationUI>();       
 
