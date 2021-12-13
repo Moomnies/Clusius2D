@@ -8,6 +8,9 @@ public class PickUpScript : MonoBehaviour
     Item item;
 
     [SerializeField]
+    int amount;
+
+    [SerializeField]
     Collider2D objectCollider;
 
     private void Update()
