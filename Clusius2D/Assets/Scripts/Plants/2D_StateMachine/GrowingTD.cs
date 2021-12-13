@@ -29,7 +29,7 @@ public class GrowingTD : MonoBehaviour, IState
         {
             plantTimer.SetTimerValue(plantedSeed.TimeToGrow);
             plantTimer.ToggleOnOffTimmer();
-            plantTimer.onTimerRunOut += NextPlantStage;         
+            plantTimer.onTimerRunOut += NextPlantStage;          
         }
         else { Debug.LogFormat("GROWING.TICK(): Timer is null! Timer: {0} In Plant: {1}", plantTimer, stateMachine.GetPlantId); }
 
