@@ -24,8 +24,8 @@ using UnityEngine;
         public Sprite[] PlantSprites { get => plantSprites; }
         public Produce TypeOfProduce { get => _Produce; }
         public float MaxNumberOfProduce { get => _MaxNumberOfProduce; }
-        public bool RegrowProduce { get => regrowProduce; }
-    }
+        public bool RegrowProduce { get => regrowProduce; }    
+}
 
 
 
