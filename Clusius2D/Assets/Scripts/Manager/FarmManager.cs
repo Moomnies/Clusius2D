@@ -45,8 +45,7 @@ public static class FarmManager
     {
         if (plantToAdd.GetComponent<PlantStateTD>() && plantToAdd.GetPlantId != null)
         {
-            _PlantInScene.Add(plantToAdd.GetPlantId, plantToAdd);
-            Debug.Log("ADDED PLANT: " + plantToAdd.GetPlantId);
+            _PlantInScene.Add(plantToAdd.GetPlantId, plantToAdd);           
         }
         else { Debug.LogFormat("FARMMANAGER.ADDMETOMANAGER(): Tried to add {0} to PlantsInSceneArray while this is not a plant", plantToAdd.name); }
     }  
