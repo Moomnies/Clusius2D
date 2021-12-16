@@ -8,6 +8,7 @@ public class PlantStateTD : MonoBehaviour
     StateMachine stateMachine;
     string plantId;
     IState startState;
+    Seed plantedSeed = null;
 
     [Header("Assign This")]
     [SerializeField]
@@ -19,17 +20,13 @@ public class PlantStateTD : MonoBehaviour
     [SerializeField]
     TimerScript timer;
 
-
     [SerializeField]
     Color availabilityColor;
 
     [Header("Debug")]
     [SerializeField]
-    bool debugMode;
-    [SerializeField]
-    Seed plantedSeed = null;
+    bool debugMode;  
  
-
     public string GetPlantId { get => plantId;}
     public Seed PlantedSeed { get => plantedSeed; set => plantedSeed = value; }
     public TimerScript Timer { get => timer; set => timer = value; }
@@ -40,6 +37,7 @@ public class PlantStateTD : MonoBehaviour
         var idleTD = new IdleTD(this);
         var growingTD = new GrowingTD(this, timer);
         var harvestTD = new HarvestTD(this);
+        var regrowthTD = new RegrowingTD(this, timer);
 
         startState = idleTD;
 
@@ -47,12 +45,13 @@ public class PlantStateTD : MonoBehaviour
 
         At(idleTD, growingTD, seedIsPlanted());
         At(growingTD, harvestTD, plantIsDoneGrowing());
-        //At(harvestTD, growingTD, waitForRegrowth());
+        At(harvestTD, regrowthTD, waitForRegrowth());
         At(harvestTD, idleTD, plantIsHarvested());
+        At(regrowthTD, harvestTD, plantIsDoneGrowing());
 
         Func<bool> seedIsPlanted() => () => plantedSeed != null;
-        //Func<bool> waitForRegrowth() => () => plantedSeed.RegrowProduce && harvestTD.Harvested;
-        Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 1;
+        Func<bool> waitForRegrowth() => () => plantedSeed.RegrowProduce && harvestTD.Harvested;
+        Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 2 && growingTD.PlantIsDoneGrowing || regrowthTD.PlantIsDoneGrowing;
         Func<bool> plantIsHarvested() => () => harvestTD.Harvested;
 
         stateMachine.SetState(idleTD);
@@ -85,7 +84,6 @@ public class PlantStateTD : MonoBehaviour
     public void SetPlantSprite(Sprite sprite)
     {
         spriteRenderer.sprite = sprite;
-        Debug.Log(sprite.name);
     }
 
     public void ExecuteBehaviourOnClick() => stateMachine.Tick();

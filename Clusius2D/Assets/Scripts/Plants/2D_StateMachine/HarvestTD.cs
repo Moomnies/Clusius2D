@@ -5,27 +5,32 @@ using UnityEngine;
 public class HarvestTD : MonoBehaviour, IState
 {
     PlayerInventory inventory;
-    PlantStateTD plantStateMachine;
+    PlantStateTD stateMachine;
 
     Seed plantedSeed;
 
     bool harvested;
     public bool Harvested { get => harvested; set => harvested = value; }
-    public HarvestTD(PlantStateTD stateMachine)
+    public HarvestTD(PlantStateTD plantStateMachine)
     {
-        plantStateMachine = stateMachine;
+        stateMachine = plantStateMachine;
         
     }   
 
     public void OnEnter()
     {
         harvested = false;
-        plantedSeed = plantStateMachine.PlantedSeed;
+        plantedSeed = stateMachine.PlantedSeed;
+
+        stateMachine.SetPlantSprite(plantedSeed.PlantSprites[plantedSeed.PlantSprites.Length - 1]);
     }
 
     public void OnExit()
     {
-        plantStateMachine.ResetPlant();
+        if (!stateMachine.PlantedSeed.RegrowProduce)
+        {
+            stateMachine.ResetPlant();
+        };
     }
 
     public void Tick()

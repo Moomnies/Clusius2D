@@ -36,8 +36,12 @@ public class HarvestingBehaviour : MonoBehaviour, IState
 
     public void OnExit()
     {     
-        harvested = false;        
-        plantReference.ResetPlant();
+        harvested = false;
+
+        if (!seed.RegrowProduce)
+        {
+            plantReference.ResetPlant();
+        }
     }
 }
    
