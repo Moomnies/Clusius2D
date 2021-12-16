@@ -38,8 +38,7 @@ public class StateMachine
             if (transitionAction != null)
             {
                 transitionAction();
-            }
-                
+            }                
         }            
 
         _CurrentState?.Tick();

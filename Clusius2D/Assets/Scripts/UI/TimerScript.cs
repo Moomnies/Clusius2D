@@ -23,11 +23,16 @@ public class TimerScript : MonoBehaviour
     void Update() => CountDownTimer();    
     void ResetTimer() => currentTimer = timeCount;   
 
+    public TimerScript(float timerAmount)
+    {
+        timeCount = timerAmount;
+    }
+
     void CountDownTimer()
     {
         if (timerIsRunning && currentTimer > -.1 && !isOnHalt)
         {
-            currentTimer -= Time.deltaTime;            
+            currentTimer -= Time.deltaTime;           
         }
         else if (timerIsRunning && currentTimer <= -.1)
         {            

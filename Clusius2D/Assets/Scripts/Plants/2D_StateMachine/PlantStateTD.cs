@@ -15,6 +15,8 @@ public class PlantStateTD : MonoBehaviour
     Collider2D objectCollider;
     [SerializeField]
     TimerScript timer;
+    [SerializeField]
+    PlantStatus plantStatus;
 
     [Header("Debug")]
     [SerializeField]
@@ -53,7 +55,7 @@ public class PlantStateTD : MonoBehaviour
 
         Func<bool> seedIsPlanted() => () => plantedSeed != null;
         Func<bool> waitForRegrowth() => () => plantedSeed.RegrowProduce && harvestTD.Harvested;
-        Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 2 && growingTD.PlantIsDoneGrowing || regrowthTD.PlantIsDoneGrowing;
+        Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 1 && growingTD.PlantIsDoneGrowing || regrowthTD.PlantIsDoneGrowing;
         Func<bool> plantIsHarvested() => () => harvestTD.Harvested;               
 
         stateMachine.SetState(idleTD);
