@@ -35,6 +35,11 @@ public class PlantStatus : MonoBehaviour
         timer.onTimerRunOut += ShowWaterIcon;
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void ShowWaterIcon()
     {
         if (!statusUI.activeSelf)
@@ -46,6 +51,8 @@ public class PlantStatus : MonoBehaviour
 
     public void FixNeed()
     {
+        Debug.Log("Here");
+
         if (statusUI.activeSelf)
         {
             statusUI.SetActive(false);
