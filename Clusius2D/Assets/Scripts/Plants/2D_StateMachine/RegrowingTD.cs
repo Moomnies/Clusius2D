@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RegrowingTD : MonoBehaviour, IState
@@ -30,7 +28,7 @@ public class RegrowingTD : MonoBehaviour, IState
             plantTimer.onTimerRunOut += NextPlantStage;
         }
         else { Debug.LogFormat("GROWING.TICK(): Timer is null! Timer: {0} In Plant: {1}", plantTimer, stateMachine.GetPlantId); }
-    
+
         stateMachine.SetPlantSprite(plantedSeed.PlantSprites[plantedSeed.PlantSprites.Length - 2]);
     }
 
@@ -43,7 +41,7 @@ public class RegrowingTD : MonoBehaviour, IState
 
     public void Tick()
     {
-        
+
     }
 
     public void NextPlantStage()

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HarvestTD : MonoBehaviour, IState
@@ -14,8 +12,7 @@ public class HarvestTD : MonoBehaviour, IState
     public HarvestTD(PlantStateTD plantStateMachine)
     {
         stateMachine = plantStateMachine;
-        
-    }   
+    }
 
     public void OnEnter()
     {
@@ -35,6 +32,11 @@ public class HarvestTD : MonoBehaviour, IState
 
     public void Tick()
     {
-        harvested = FarmManager.AddProduceToInventory(plantedSeed.TypeOfProduce);        
+        harvested = FarmManager.AddProduceToInventory(plantedSeed.TypeOfProduce);
+
+        if (harvested)
+        {
+            stateMachine.ExecuteBehaviourOnClick();
+        }
     }
 }

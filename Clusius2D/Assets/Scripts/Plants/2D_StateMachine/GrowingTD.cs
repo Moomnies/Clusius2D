@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GrowingTD : MonoBehaviour, IState
 {
-    PlantStateTD stateMachine;    
+    PlantStateTD stateMachine;
     TimerScript plantTimer;
 
     Seed plantedSeed;
@@ -28,18 +26,18 @@ public class GrowingTD : MonoBehaviour, IState
         plantIsDoneGrowing = false;
         orderInPlantStage = 0;
 
-        if(plantTimer != null)
+        if (plantTimer != null)
         {
             plantTimer.SetTimerValue(plantedSeed.TimeToGrow);
             plantTimer.ToggleOnOffTimmer();
-            plantTimer.onTimerRunOut += NextPlantStage;          
+            plantTimer.onTimerRunOut += NextPlantStage;
         }
         else { Debug.LogFormat("GROWING.TICK(): Timer is null! Timer: {0} In Plant: {1}", plantTimer, stateMachine.GetPlantId); }
 
-      
+
         if (plantedSeed.PlantSprites != null)
         {
-            plantStageSprites = new Sprite[plantedSeed.PlantSprites.Length];          
+            plantStageSprites = new Sprite[plantedSeed.PlantSprites.Length];
 
             for (int i = 0; i < plantStageSprites.Length; i++)
             {
@@ -52,14 +50,14 @@ public class GrowingTD : MonoBehaviour, IState
 
     public void Tick()
     {
-       
+
     }
 
     public void OnExit()
     {
         plantTimer.onTimerRunOut -= NextPlantStage;
         plantTimer.ToggleOnOffTimmer();
-    }   
+    }
 
     public void NextPlantStage()
     {
