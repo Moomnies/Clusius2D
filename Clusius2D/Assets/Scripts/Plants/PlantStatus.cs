@@ -50,9 +50,7 @@ public class PlantStatus : MonoBehaviour
     }
 
     public void FixNeed()
-    {
-        Debug.Log("Here");
-
+    {     
         if (statusUI.activeSelf)
         {
             statusUI.SetActive(false);
