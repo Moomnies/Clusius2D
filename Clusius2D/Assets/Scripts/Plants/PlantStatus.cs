@@ -30,7 +30,7 @@ public class PlantStatus : MonoBehaviour
 
     private void Start()
     {
-        timer.SetTimerValue(Random.Range(2, timerTillWater));
+        timer.SetTimerValue(Random.Range(timerTillWater - 2, timerTillWater + 2));
         timer.ToggleOnOffTimmer();
         timer.onTimerRunOut += ShowWaterIcon;
     }
