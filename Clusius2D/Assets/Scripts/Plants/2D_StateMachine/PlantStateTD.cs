@@ -7,6 +7,7 @@ public class PlantStateTD : MonoBehaviour
     Seed plantedSeed = null;
 
     string plantId;
+    bool plantNeedsCare;
 
     [Header("Assign This")]
     [SerializeField]
@@ -55,7 +56,7 @@ public class PlantStateTD : MonoBehaviour
 
         Func<bool> seedIsPlanted() => () => plantedSeed != null;
         Func<bool> waitForRegrowth() => () => plantedSeed.RegrowProduce && harvestTD.Harvested;
-        Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 1 && growingTD.PlantIsDoneGrowing || regrowthTD.PlantIsDoneGrowing;
+        Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 2 && growingTD.PlantIsDoneGrowing;
         Func<bool> plantIsHarvested() => () => harvestTD.Harvested;               
 
         stateMachine.SetState(idleTD);
@@ -79,7 +80,7 @@ public class PlantStateTD : MonoBehaviour
             if (objectCollider == touchedCollider)
             {
                 if (touch.phase == TouchPhase.Began)
-                {
+                {                   
                     FarmManager.ThisPlantIsTouched(plantId);
                 }
             }

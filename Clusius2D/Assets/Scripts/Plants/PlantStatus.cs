@@ -9,6 +9,8 @@ public class PlantStatus : MonoBehaviour
     [Header("Settings")]
     [SerializeField]
     float timerTillWater;
+    [SerializeField]
+    PlantStateTD statemachine;
 
     [Header("Assign This")]
     [SerializeField]
@@ -28,7 +30,7 @@ public class PlantStatus : MonoBehaviour
 
     private void Start()
     {
-        timer.SetTimerValue(timerTillWater);
+        timer.SetTimerValue(Random.Range(2, timerTillWater));
         timer.ToggleOnOffTimmer();
         timer.onTimerRunOut += ShowWaterIcon;
     }
@@ -38,7 +40,15 @@ public class PlantStatus : MonoBehaviour
         if (!statusUI.activeSelf)
         {
             statusUI.SetActive(true);
-            iconImage.sprite = needWater;
+            iconImage.sprite = needWater;            
+        }
+    }
+
+    public void FixNeed()
+    {
+        if (statusUI.activeSelf)
+        {
+            statusUI.SetActive(false);
         }
     }
 }

@@ -35,11 +35,6 @@ public class HarvestTD : MonoBehaviour, IState
     public void Tick()
     {
         harvested = FarmManager.AddProduceToInventory(plantedSeed.TypeOfProduce);
-
-        if (harvested)
-        {
-            stateMachine.ExecuteBehaviourOnClick();
-        }
     }
 
     public void OnPauze()
