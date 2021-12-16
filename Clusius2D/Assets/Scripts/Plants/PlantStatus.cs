@@ -10,7 +10,7 @@ public class PlantStatus : MonoBehaviour
     [SerializeField]
     float timerTillWater;
     [SerializeField]
-    PlantStateTD statemachine;
+    PlantStateTD statemachine;    
 
     [Header("Assign This")]
     [SerializeField]
@@ -31,7 +31,7 @@ public class PlantStatus : MonoBehaviour
     private void Start()
     {
         timer.SetTimerValue(Random.Range(timerTillWater - 2, timerTillWater + 2));        
-    }
+    }   
 
     public void AllowTimerToRun()
     {
