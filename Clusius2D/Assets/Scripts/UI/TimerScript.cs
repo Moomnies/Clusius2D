@@ -10,6 +10,7 @@ public class TimerScript : MonoBehaviour
     
     bool isTimerOn = false;
     bool timerIsRunning = false;
+    bool isOnHalt;
 
     float timeCount;
     [SerializeField]
@@ -24,7 +25,7 @@ public class TimerScript : MonoBehaviour
 
     void CountDownTimer()
     {
-        if (timerIsRunning && currentTimer > -.1)
+        if (timerIsRunning && currentTimer > -.1 && !isOnHalt)
         {
             currentTimer -= Time.deltaTime;            
         }
@@ -43,10 +44,16 @@ public class TimerScript : MonoBehaviour
             timerIsRunning = true;
             currentTimer = timeCount;
             onTimerRunOut += ResetTimer;
+            isOnHalt = false;
         }
         else 
         { 
             timerIsRunning = false; 
         }
-    }   
+    } 
+    
+    public void ToggleTimer()
+    {
+        isOnHalt = !isOnHalt;
+    }
 }

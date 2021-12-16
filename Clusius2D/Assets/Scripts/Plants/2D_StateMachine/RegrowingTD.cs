@@ -49,4 +49,14 @@ public class RegrowingTD : MonoBehaviour, IState
         plantIsDoneGrowing = true;
         stateMachine.ExecuteBehaviourOnClick();
     }
+
+    public void OnPauze()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnContinue()
+    {
+        throw new System.NotImplementedException();
+    }
 }

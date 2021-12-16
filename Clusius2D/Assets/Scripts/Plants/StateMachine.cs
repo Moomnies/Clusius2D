@@ -12,6 +12,8 @@ public class StateMachine
     public IState GetCurrentState() => _CurrentState;
 
     Dictionary<Type, List<Transition>> _Transition = new Dictionary<Type, List<Transition>>();
+    Dictionary<Func<bool>, Action> transitionAction = new Dictionary<Func<bool>, Action>();
+
     List<Transition> _CurrentTransitions = new List<Transition>();
     List<Transition> _AnyTransition = new List<Transition>();
 
@@ -28,9 +30,29 @@ public class StateMachine
 
         Transition _Transition = GetTransition();
         if (_Transition != null)
+        {
             SetState(_Transition._To);
 
+            Action transitionAction = GetTransitionAction(_Transition);
+
+            if (transitionAction != null)
+            {
+                transitionAction();
+            }
+                
+        }            
+
         _CurrentState?.Tick();
+    }    
+
+    Action GetTransitionAction(Transition transition)
+    {
+        if (transitionAction.ContainsKey(transition._Condition))
+        {
+            return transitionAction[transition._Condition];
+        }
+
+        return null;
     }
 
     public void SetState(IState state)
@@ -64,7 +86,23 @@ public class StateMachine
         transitions.Add(new Transition(to, predicate));        
     }
 
+    public void Pause()
+    {
+        _CurrentState.OnPauze();
+    }
+
+    public void Continue()
+    {
+        _CurrentState.OnContinue();
+    }
+
     public void AddAnyTransition(IState state, Func<bool> predicate) => _AnyTransition.Add(new Transition(state, predicate));
+
+    public void AddTransitionAction(Func<bool> condition, Action action, Action method)
+    {
+        action += method;
+        transitionAction.Add(condition, action);
+    }
 
     class Transition
     {

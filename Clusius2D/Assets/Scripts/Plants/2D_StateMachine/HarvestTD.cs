@@ -28,6 +28,8 @@ public class HarvestTD : MonoBehaviour, IState
         {
             stateMachine.ResetPlant();
         };
+
+        harvested = false;
     }
 
     public void Tick()
@@ -38,5 +40,15 @@ public class HarvestTD : MonoBehaviour, IState
         {
             stateMachine.ExecuteBehaviourOnClick();
         }
+    }
+
+    public void OnPauze()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnContinue()
+    {
+        throw new System.NotImplementedException();
     }
 }

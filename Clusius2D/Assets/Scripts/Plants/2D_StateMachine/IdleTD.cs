@@ -11,6 +11,11 @@ public class IdleTD : MonoBehaviour, IState
         stateMachine = plantStateMachine;
     }
 
+    public void OnContinue()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void OnEnter()
     {
         
@@ -19,6 +24,11 @@ public class IdleTD : MonoBehaviour, IState
     public void OnExit()
     {
        
+    }
+
+    public void OnPauze()
+    {
+        throw new System.NotImplementedException();
     }
 
     public void Tick()

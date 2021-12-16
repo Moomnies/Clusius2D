@@ -23,6 +23,9 @@ public class PlantStateTD : MonoBehaviour
     public string GetPlantId { get => plantId; }
     public Seed PlantedSeed { get => plantedSeed; set => plantedSeed = value; }
     public TimerScript Timer { get => timer; set => timer = value; }
+
+    event Action newEvent;
+
     private void Awake()
     {
         stateMachine = new StateMachine(debugMode);
@@ -32,7 +35,15 @@ public class PlantStateTD : MonoBehaviour
         var harvestTD = new HarvestTD(this);
         var regrowthTD = new RegrowingTD(this, timer);
 
-        void At(IState to, IState from, Func<bool> condition) => stateMachine.AddTransition(to, from, condition);
+        void At(IState to, IState from, Func<bool> condition)
+        {
+            stateMachine.AddTransition(to, from, condition);
+        }
+
+        void Hook(Func<bool> condition, Action action, Action method)
+        {
+            stateMachine.AddTransitionAction(condition, action, method);
+        }
 
         At(idleTD, growingTD, seedIsPlanted());
         At(growingTD, harvestTD, plantIsDoneGrowing());
@@ -43,7 +54,7 @@ public class PlantStateTD : MonoBehaviour
         Func<bool> seedIsPlanted() => () => plantedSeed != null;
         Func<bool> waitForRegrowth() => () => plantedSeed.RegrowProduce && harvestTD.Harvested;
         Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 2 && growingTD.PlantIsDoneGrowing || regrowthTD.PlantIsDoneGrowing;
-        Func<bool> plantIsHarvested() => () => harvestTD.Harvested;
+        Func<bool> plantIsHarvested() => () => harvestTD.Harvested;               
 
         stateMachine.SetState(idleTD);
     }

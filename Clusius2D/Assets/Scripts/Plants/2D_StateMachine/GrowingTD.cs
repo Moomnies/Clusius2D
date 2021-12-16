@@ -71,4 +71,14 @@ public class GrowingTD : MonoBehaviour, IState
         orderInPlantStage++;
         stateMachine.SetPlantSprite(plantStageSprites[orderInPlantStage]);
     }
+
+    public void OnPauze()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnContinue()
+    {
+        throw new System.NotImplementedException();
+    }
 }
