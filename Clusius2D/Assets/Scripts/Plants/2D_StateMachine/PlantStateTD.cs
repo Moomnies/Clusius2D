@@ -27,7 +27,7 @@ public class PlantStateTD : MonoBehaviour
     public Seed PlantedSeed { get => plantedSeed; set => plantedSeed = value; }
     public TimerScript Timer { get => timer; set => timer = value; }
 
-    event Action newEvent;
+    event Action plantIsPlanted;
 
     private void Awake()
     {
@@ -57,8 +57,12 @@ public class PlantStateTD : MonoBehaviour
         Func<bool> seedIsPlanted() => () => plantedSeed != null;
         Func<bool> waitForRegrowth() => () => plantedSeed.RegrowProduce && harvestTD.Harvested;
         Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 2 && growingTD.PlantIsDoneGrowing;
-        Func<bool> plantIsHarvested() => () => harvestTD.Harvested;               
+        Func<bool> plantIsHarvested() => () => harvestTD.Harvested;
 
+        plantIsPlanted += plantStatus.AllowTimerToRun;
+
+        Hook(seedIsPlanted(), plantIsPlanted, null);
+        
         stateMachine.SetState(idleTD);
     }
 
