@@ -99,7 +99,7 @@ public class StateMachine
 
     public void AddTransitionAction(Func<bool> condition, Action action, Action method)
     {
-        //action += method;
+        action += method;
         transitionAction.Add(condition, action);
     }
 

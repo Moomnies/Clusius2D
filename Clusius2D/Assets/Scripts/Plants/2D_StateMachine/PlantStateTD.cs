@@ -59,9 +59,7 @@ public class PlantStateTD : MonoBehaviour
         Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 2 && growingTD.PlantIsDoneGrowing;
         Func<bool> plantIsHarvested() => () => harvestTD.Harvested;
 
-        plantIsPlanted += plantStatus.AllowTimerToRun;
-
-        Hook(seedIsPlanted(), plantIsPlanted, null);
+        Hook(seedIsPlanted(), plantIsPlanted, plantStatus.AllowTimerToRun);
         
         stateMachine.SetState(idleTD);
     }

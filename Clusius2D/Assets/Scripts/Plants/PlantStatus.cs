@@ -39,11 +39,6 @@ public class PlantStatus : MonoBehaviour
         timer.onTimerRunOut += ShowWaterIcon;
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void ShowWaterIcon()
     {
         if (!statusUI.activeSelf)

@@ -52,13 +52,9 @@ public class TimerScript : MonoBehaviour
             isOnHalt = false;
         }
         else 
-        { 
+        {
+            ResetTimer();
             timerIsRunning = false; 
         }
-    } 
-    
-    public void ToggleTimer()
-    {
-        isOnHalt = !isOnHalt;
-    }
+    }   
 }
