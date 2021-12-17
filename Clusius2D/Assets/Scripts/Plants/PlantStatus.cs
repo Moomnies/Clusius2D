@@ -19,6 +19,8 @@ public class PlantStatus : MonoBehaviour
     SpriteRenderer iconImage;    
     [SerializeField]
     TimerScript timer;
+    [SerializeField]
+    AudioSource audio;
 
     [Header("Sprites")]
     [SerializeField]
@@ -31,7 +33,15 @@ public class PlantStatus : MonoBehaviour
     private void Start()
     {
         timer.SetTimerValue(Random.Range(timerTillWater - 2, timerTillWater + 2));        
-    }   
+    }
+
+    private void Update()
+    {
+        if (statusUI.activeSelf)
+        {
+
+        }
+    }
 
     public void AllowTimerToRun()
     {
@@ -39,12 +49,18 @@ public class PlantStatus : MonoBehaviour
         timer.onTimerRunOut += ShowWaterIcon;
     }
 
+    public void StopWaterTimer()
+    {
+        timer.ToggleOnOffTimmer();
+    }
+
     private void ShowWaterIcon()
     {
         if (!statusUI.activeSelf)
         {
             statusUI.SetActive(true);
-            iconImage.sprite = needWater;            
+            iconImage.sprite = needWater;
+            timer.ToggleOnOffTimmer();
         }
     }
 
@@ -52,7 +68,9 @@ public class PlantStatus : MonoBehaviour
     {     
         if (statusUI.activeSelf)
         {
+            audio.Play();
             statusUI.SetActive(false);
+            timer.ToggleOnOffTimmer();
         }
     }
 }
