@@ -56,7 +56,7 @@ public class PlantStateTD : MonoBehaviour
 
         Func<bool> seedIsPlanted() => () => plantedSeed != null;
         Func<bool> waitForRegrowth() => () => plantedSeed.RegrowProduce && harvestTD.Harvested;
-        Func<bool> plantIsDoneGrowing() => () => growingTD.OrderInPlantStage == plantedSeed.PlantSprites.Length - 2 && growingTD.PlantIsDoneGrowing;
+        Func<bool> plantIsDoneGrowing() => () => growingTD.PlantIsDoneGrowing;
         Func<bool> plantIsHarvested() => () => harvestTD.Harvested;
 
         Hook(seedIsPlanted(), plantIsPlanted, plantStatus.AllowTimerToRun);

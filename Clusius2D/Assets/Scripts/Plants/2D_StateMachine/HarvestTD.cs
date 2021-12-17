@@ -27,9 +27,7 @@ public class HarvestTD : MonoBehaviour, IState
         if (!stateMachine.PlantedSeed.RegrowProduce)
         {
             stateMachine.ResetPlant();
-        };
-
-        harvested = false;
+        }     
     }
 
     public void Tick()

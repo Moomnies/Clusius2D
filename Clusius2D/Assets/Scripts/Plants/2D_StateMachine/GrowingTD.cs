@@ -64,7 +64,7 @@ public class GrowingTD : MonoBehaviour, IState
         if (orderInPlantStage == plantStageSprites.Length - 2)
         {
             plantIsDoneGrowing = true;
-            //stateMachine.ExecuteBehaviourOnClick();
+            stateMachine.ExecuteBehaviourOnClick();
             return;
         }
 
