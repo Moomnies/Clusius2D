@@ -25,8 +25,7 @@ public class PickUpScript : MonoBehaviour
             if (objectCollider == touchedCollider)
             {
                 if (touch.phase == TouchPhase.Began)
-                {                  
-
+                {               
                     PlayerInventory inventory = PlayerInventory.GetPlayerInventory();
                     
                     bool itemAddedToInventory = inventory.AddToFirstEmptySlot(item);                    
