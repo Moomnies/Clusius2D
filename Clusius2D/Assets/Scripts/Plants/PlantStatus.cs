@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlantStatus : MonoBehaviour
 {
+    [SerializeField]
     float plantQuality;
     [Header("Settings")]
     [SerializeField]
@@ -39,8 +40,27 @@ public class PlantStatus : MonoBehaviour
     {
         if (statusUI.activeSelf)
         {
-
+            plantQuality -= Time.deltaTime;
         }
+        else { plantQuality += Time.deltaTime; }
+
+        if(plantQuality <= 0)
+        {
+            PlantIsDead();
+        }
+    }
+
+    public void PlantIsDead()
+    {
+        if (!statusUI.activeSelf)
+        {
+            statusUI.SetActive(true);            
+        }   
+
+        iconImage.sprite = death;
+        timer.ToggleOnOffTimmer();
+
+        statemachine.ResetPlant();
     }
 
     public void AllowTimerToRun()
