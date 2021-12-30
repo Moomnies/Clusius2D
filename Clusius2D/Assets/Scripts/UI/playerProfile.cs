@@ -51,7 +51,7 @@ public class playerProfile : MonoBehaviour
     public void earnPlant(float amount)
     {
         totalPlant += amount;
-        ExpText.text = totalPlant.ToString();
+        PlantText.text = totalPlant.ToString();
     }
     public void earnExp(float amount)
     {
