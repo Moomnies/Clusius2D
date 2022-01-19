@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class playerProfile : MonoBehaviour
+public class PlayerProfile : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Reference to the Player Settings Menu.")]
     GameObject _PlayerSettingsMenu;
 
-    [SerializeField] float totalExp;
-    [SerializeField] float totalPlant;
+    public float totalExp;
+    public float totalPlant;
     [SerializeField] float nextLevelExp;
-    [SerializeField] float PreviusLevelExp;
+    public float PreviusLevelExp;
     [SerializeField] float CurrentLevelExp;
-    [SerializeField] float PlayerLevel;
-    [SerializeField] string name;
+    public float PlayerLevel;
+    public string namePlayer;
     string[] firstName = { "cute","long","big","tiny","red","blue","fast","rocky","mad","happy"};
     string[] secondName = { "sad","strong","lazy","toasted", "disrupted", "super","sandy","round","yellow","cool","normal"};
     string[] thirdName = { "dragon","box","farmer","scarecrow","panda","pumkin","egg","chicken","dude","girl","horse","dog"};
@@ -27,10 +27,26 @@ public class playerProfile : MonoBehaviour
 
     private void Start()
     {
-        changeName();
+        LoadPlayer();
+        nameText.text = namePlayer;
         earnExp(0);
     }
 
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        GameDataPlayer data = SaveSystem.LoadPlayer();
+
+        namePlayer = data.namePlayer;
+        PreviusLevelExp = data.PreviusLevelExp;
+        totalExp = data.totalExp;
+        PlayerLevel = data.PlayerLevel;
+        totalPlant = data.totalPlant;
+    }
 
     public void OpenPlayerSettings()
     {
@@ -72,8 +88,8 @@ public class playerProfile : MonoBehaviour
 
     public void changeName()
     {
-        name = (firstName[(int)Random.Range(0, firstName.Length)] +" "+ secondName[(int)Random.Range(0, secondName.Length)] +" "+ thirdName[(int)Random.Range(0, thirdName.Length)]);
-        nameText.text = name;
+        namePlayer = (firstName[(int)Random.Range(0, firstName.Length)] +" "+ secondName[(int)Random.Range(0, secondName.Length)] +" "+ thirdName[(int)Random.Range(0, thirdName.Length)]);
+        nameText.text = namePlayer;
     }
 }
  

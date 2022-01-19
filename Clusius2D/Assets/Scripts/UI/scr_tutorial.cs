@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class scr_tutorial : MonoBehaviour
+public class Scr_tutorial : MonoBehaviour
 {
     [SerializeField] GameObject[] Buttons;
     [SerializeField] GameObject[] Indicators;
@@ -11,13 +11,16 @@ public class scr_tutorial : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < Buttons.Length; i++)
+        if (tutorial == true)
         {
-            if (CurrentButton < i)
+            for (int i = 0; i < Buttons.Length; i++)
             {
-                Buttons[i].SetActive(false);
-                indi.transform.position = Buttons[0].transform.position;
-                //Indicators[i].SetActive(false);
+                if (CurrentButton < i)
+                {
+                    Buttons[i].SetActive(false);
+                    indi.transform.position = Buttons[0].transform.position;
+                    //Indicators[i].SetActive(false);
+                }
             }
         }
     }
