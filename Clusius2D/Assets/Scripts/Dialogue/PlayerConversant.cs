@@ -28,6 +28,7 @@ namespace RPG.Dialogue
             _CurrentNode = _CurrentDialogue.GetRoodNode();
             _DialogueNPC = _CurrentDialogue.WhoAmITalkingTo();
             TriggerEnterAction();
+
             if(onConversantUpdated != null) {
                 onConversantUpdated();
             }
