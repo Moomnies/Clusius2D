@@ -88,9 +88,7 @@ public class PlantStatus : MonoBehaviour
     {     
         if (statusUI.activeSelf)
         {
-            audio.Play();
-            statusUI.SetActive(false);
-            timer.ToggleOnOffTimmer();
+            DialogueQuestion.GetQuestion(this);
         }
     }
 }

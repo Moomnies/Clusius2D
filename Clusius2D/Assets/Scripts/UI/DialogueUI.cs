@@ -24,7 +24,7 @@ namespace RPG.UI
         {            
             _NextButton.onClick.AddListener(() => Next());
             _QuitButton.onClick.AddListener(() => _PlayerConversant.Quit());
-            _PlayerConversant.onConversantUpdated += UpdateUI;
+            PlayerConversant.onConversantUpdated += UpdateUI;
 
             UpdateUI();
         }
@@ -56,13 +56,12 @@ namespace RPG.UI
                 return;
             }
             
-            _AIText.text = _PlayerConversant.GetText();           
-            
+            _AIText.text = _PlayerConversant.GetText();
 
-            if (_PlayerConversant.HasNext())
-            {
-                _NextButtonText.SetText("End>>");                    
-            }          
+
+            if (_PlayerConversant.HasNext()) {
+                _NextButtonText.SetText("End>>");
+            } else { _NextButtonText.SetText("Next>>"); }        
 
             foreach (Transform item in _ChoiceRoot)
             {

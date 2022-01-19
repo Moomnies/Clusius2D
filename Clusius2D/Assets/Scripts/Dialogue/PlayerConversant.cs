@@ -9,20 +9,20 @@ namespace RPG.Dialogue
     public class PlayerConversant : MonoBehaviour
     {
         [SerializeField] Dialogue _TestDialogue;
-        Dialogue _CurrentDialogue;
-        DialogueNode _CurrentNode = null;
+        static Dialogue _CurrentDialogue;
+        static DialogueNode _CurrentNode = null;
         bool _IsPlayerChoosing = false;
-        NPC _DialogueNPC;
+        static NPC _DialogueNPC;
         string _NPC;
 
-        public event Action onConversantUpdated;
+        public static event Action onConversantUpdated;
 
         private void Start()
         {
             StartDialogue(_TestDialogue);
         }
 
-        public void StartDialogue(Dialogue newDIalogue)
+        public static void StartDialogue(Dialogue newDIalogue)
         {
             _CurrentDialogue = newDIalogue;
             _CurrentNode = _CurrentDialogue.GetRoodNode();
@@ -87,7 +87,7 @@ namespace RPG.Dialogue
 
         public bool IsActive() => _CurrentDialogue != null;
 
-        private void TriggerEnterAction()
+        private static void TriggerEnterAction()
         {
             if(_CurrentNode != null && _CurrentNode.OnEnterAction != "")
             {
