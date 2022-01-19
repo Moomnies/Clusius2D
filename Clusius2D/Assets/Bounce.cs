@@ -16,7 +16,7 @@ public class Bounce : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        position = new Vector2((parent.transform.position.x), (parent.transform.position.y + 5));
+        position = new Vector2(this.transform.position.x, (parent.transform.position.y + 5));
     }
 
     // Update is called once per frame
