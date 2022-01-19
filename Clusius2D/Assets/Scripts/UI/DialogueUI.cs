@@ -56,8 +56,7 @@ namespace RPG.UI
                 return;
             }
             
-            _AIText.text = _PlayerConversant.GetText();
-            _SpeakerText.text = _PlayerConversant.GetSpeaker();
+            _AIText.text = _PlayerConversant.GetText();           
             
 
             if (_PlayerConversant.HasNext())

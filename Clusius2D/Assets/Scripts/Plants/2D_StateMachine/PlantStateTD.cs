@@ -18,6 +18,8 @@ public class PlantStateTD : MonoBehaviour
     TimerScript timer;
     [SerializeField]
     PlantStatus plantStatus;
+    [SerializeField]
+    static bool menuOpen = false;
 
     [Header("Debug")]
     [SerializeField]
@@ -26,6 +28,7 @@ public class PlantStateTD : MonoBehaviour
     public string GetPlantId { get => plantId; }
     public Seed PlantedSeed { get => plantedSeed; set => plantedSeed = value; }
     public TimerScript Timer { get => timer; set => timer = value; }
+    public static bool MenuOpen { get => menuOpen; set => menuOpen = value; }
 
     event Action plantIsPlanted;
 
@@ -72,7 +75,7 @@ public class PlantStateTD : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && !menuOpen)
         {
             Touch touch = Input.GetTouch(0);
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);

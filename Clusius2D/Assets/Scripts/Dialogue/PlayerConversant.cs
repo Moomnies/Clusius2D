@@ -28,7 +28,9 @@ namespace RPG.Dialogue
             _CurrentNode = _CurrentDialogue.GetRoodNode();
             _DialogueNPC = _CurrentDialogue.WhoAmITalkingTo();
             TriggerEnterAction();
-            onConversantUpdated();
+            if(onConversantUpdated != null) {
+                onConversantUpdated();
+            }
         }
 
         public void Quit()
@@ -69,15 +71,6 @@ namespace RPG.Dialogue
             _CurrentNode = chosenNode;
             TriggerEnterAction();   
             onConversantUpdated();
-        }
-
-        public string GetSpeaker()
-        {
-            _NPC = _CurrentDialogue.WhoAmITalkingTo().Name;
-
-            if(_CurrentDialogue.WhoAmITalkingTo().Name == null){
-                return _NPC;
-            } else { return _CurrentDialogue.WhoAmITalkingTo().Name; }
         }
 
         public IEnumerable<DialogueNode> GetChoices() => _CurrentDialogue.GetAllChoices(_CurrentNode);        
