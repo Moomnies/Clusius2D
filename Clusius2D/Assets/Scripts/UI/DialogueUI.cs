@@ -38,11 +38,13 @@ namespace RPG.UI
             }           
 
             _PlayerConversant.Next();
-            
-            
-            if (!_PlayerConversant.IsChoosing())
+
+
+            if (!_Choices.activeSelf) 
             {
-                _NextButton.gameObject.SetActive(true);               
+                if (!_PlayerConversant.IsChoosing() || !_NextButton.gameObject.activeSelf) {
+                    _NextButton.gameObject.SetActive(true);
+                }
             }           
                      
         }
@@ -58,6 +60,11 @@ namespace RPG.UI
             
             _AIText.text = _PlayerConversant.GetText();
 
+            if (!_Choices.activeSelf) {
+                if (!_PlayerConversant.IsChoosing() || !_NextButton.gameObject.activeSelf) {
+                    _NextButton.gameObject.SetActive(true);
+                }
+            }
 
             if (_PlayerConversant.HasNext()) {
                 _NextButtonText.SetText("End>>");
@@ -75,12 +82,10 @@ namespace RPG.UI
         private void BuildChoiceList()
         {
             if (_PlayerConversant.IsChoosing())
-            {             
-                if (_NextButton.gameObject.activeSelf)
-                {
+            {
+                if (_NextButton.gameObject.activeSelf) {
                     _NextButton.gameObject.SetActive(false);
-                    
-                }
+                } 
                 
                 if (!_Choices.gameObject.activeSelf)
                 {

@@ -9,7 +9,7 @@ namespace RPG.Dialogue
     public class PlayerConversant : MonoBehaviour
     {
         [SerializeField] Dialogue _TestDialogue;
-        static Dialogue _CurrentDialogue;
+        public static Dialogue _CurrentDialogue;
         static DialogueNode _CurrentNode = null;
         bool _IsPlayerChoosing = false;
         static NPC _DialogueNPC;

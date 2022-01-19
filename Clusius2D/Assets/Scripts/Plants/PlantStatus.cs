@@ -88,7 +88,7 @@ public class PlantStatus : MonoBehaviour
     {     
         if (statusUI.activeSelf)
         {
-            DialogueQuestion.GetQuestion(this);
+            DialogueQuestion.startQuestion(this);
         }
     }
 }

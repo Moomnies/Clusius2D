@@ -1,5 +1,7 @@
 using RPG.Dialogue;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.Events;
 
 public class DialogueQuestion : MonoBehaviour {
 
@@ -7,6 +9,8 @@ public class DialogueQuestion : MonoBehaviour {
     Dialogue[] questions;
 
     static Dialogue[] questionDialogues;
+
+    public static UnityAction<PlantStatus> startQuestion;
 
     private void Start() {
 
@@ -16,13 +20,27 @@ public class DialogueQuestion : MonoBehaviour {
 
             questionDialogues[i] = questions[i];
         }
+
+        startQuestion += GetQuestion;
     }
 
-    public static void GetQuestion(PlantStatus plantStatus) {
+    public void GetQuestion(PlantStatus plantStatus) {
+
+        StartCoroutine(WaitForAnswer());
+    }  
+
+    IEnumerator WaitForAnswer() {
 
         int i = Random.Range(0, questionDialogues.Length);
 
         PlayerConversant.StartDialogue(questionDialogues[i]);
+
+        while (PlayerConversant._CurrentDialogue != null) {
+
+            yield return false;
+        }
+
+        yield return true;
     }
 }
 
