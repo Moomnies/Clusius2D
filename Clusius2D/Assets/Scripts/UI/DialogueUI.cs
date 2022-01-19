@@ -99,6 +99,13 @@ namespace RPG.UI
                     Button button = choiceInstance.GetComponentInChildren<Button>();
                     button.onClick.AddListener(() =>
                     {
+                        if (choice.CorrectAnswer) {
+
+                            Debug.Log("D_UI: I am here");
+                            DialogueQuestion.awnswerIsCorrect = true;
+
+                        }
+
                         _PlayerConversant.SelectChoice(choice);
                         _Choices.SetActive(false);
                         Next();                        

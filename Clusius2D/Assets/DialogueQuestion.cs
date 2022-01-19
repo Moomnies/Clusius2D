@@ -12,6 +12,11 @@ public class DialogueQuestion : MonoBehaviour {
 
     public static UnityAction<PlantStatus> startQuestion;
 
+    [SerializeField]
+    PlantStatus status;
+
+    public static bool awnswerIsCorrect = false;
+
     private void Start() {
 
         questionDialogues = new Dialogue[questions.Length];
@@ -26,6 +31,8 @@ public class DialogueQuestion : MonoBehaviour {
 
     public void GetQuestion(PlantStatus plantStatus) {
 
+        status = plantStatus;
+        awnswerIsCorrect = false;
         StartCoroutine(WaitForAnswer());
     }  
 
@@ -33,14 +40,21 @@ public class DialogueQuestion : MonoBehaviour {
 
         int i = Random.Range(0, questionDialogues.Length);
 
-        PlayerConversant.StartDialogue(questionDialogues[i]);
+        PlayerConversant.StartDialogue(questionDialogues[i]);        
 
-        while (PlayerConversant._CurrentDialogue != null) {
+        while ((PlayerConversant._CurrentDialogue != null || awnswerIsCorrect == true) && status != null) {
+
+            Debug.Log("DQ: I am here " + awnswerIsCorrect);
+
+            if (awnswerIsCorrect) {
+
+                Debug.Log("DQ_B: I am here");
+                status.needFixed();
+                status = null;
+            }
 
             yield return false;
-        }
-
-        yield return true;
+        }          
     }
 }
 

@@ -16,7 +16,7 @@ namespace RPG.Dialogue
         [SerializeField]
         Rect _Rect = new Rect(0, 0, 200, 100);
         [SerializeField]
-        String _Parent;
+        bool correctAnswer;
      
         string onEnterAction;       
         string onExitAction;
@@ -27,7 +27,7 @@ namespace RPG.Dialogue
         public Vector2 RectPosition { get => _Rect.position; }
         public string OnEnterAction { get => onEnterAction; set => onEnterAction = value; }
         public string OnExitAction { get => onExitAction; set => onExitAction = value; }
-        public string Parent { get => _Parent; set => _Parent = value; }
+        public bool CorrectAnswer { get => correctAnswer; set => correctAnswer = value; }
 
 #if UNITY_EDITOR
         public void SetPosition(Vector2 newPosition)

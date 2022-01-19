@@ -126,16 +126,14 @@ namespace RPG.Dialogue
             newNode.name = Guid.NewGuid().ToString();
 
             parent.AddChild(newNode.name);
-            newNode.SetPosition(parent.RectPosition + _NewNodeOffset);
-            newNode.Parent = parent.name;
+            newNode.SetPosition(parent.RectPosition + _NewNodeOffset);            
 
             return newNode;
         }
 
         private void setSpeaker(NPCNode aNewNPCNode, DialogueNode parent)
         {
-            DialogueNode dialogueNode = parent;
-            String parentID = parent.Parent;
+            DialogueNode dialogueNode = parent;           
 
             if (dialogueNode.GetType() == typeof(NPCNode))
             {
@@ -145,8 +143,7 @@ namespace RPG.Dialogue
 
             while (dialogueNode.GetType() != typeof(NPCNode))
             {
-                parentID = dialogueNode.Parent;
-                dialogueNode = _NodeLookup[parentID];                
+                           
             }
 
             NPCNode anotherNPCNode = dialogueNode as NPCNode;
