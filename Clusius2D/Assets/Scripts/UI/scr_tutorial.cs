@@ -7,6 +7,7 @@ public class scr_tutorial : MonoBehaviour
     [SerializeField] int CurrentButton;
     [SerializeField] GameObject Pointer;
     [SerializeField] GameObject indi;
+    [SerializeField] bool tutorial;
 
     void Start()
     {
@@ -24,7 +25,7 @@ public class scr_tutorial : MonoBehaviour
     void Update()
     {
 
-        if (CurrentButton < (Buttons.Length - 1))
+        if (CurrentButton < (Buttons.Length ))
         {
             if (Input.touchCount > 0)
             {
@@ -76,6 +77,11 @@ public class scr_tutorial : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            indi.SetActive(false);
+            tutorial = false;
         }
     }
 }
