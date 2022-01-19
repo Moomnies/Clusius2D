@@ -24,13 +24,15 @@ namespace RPG.Dialogue
 
         public static void StartDialogue(Dialogue newDIalogue)
         {
-            _CurrentDialogue = newDIalogue;
-            _CurrentNode = _CurrentDialogue.GetRoodNode();
-            _DialogueNPC = _CurrentDialogue.WhoAmITalkingTo();
-            TriggerEnterAction();
+            if(_CurrentDialogue == null) {
+                _CurrentDialogue = newDIalogue;
+                _CurrentNode = _CurrentDialogue.GetRoodNode();
+                _DialogueNPC = _CurrentDialogue.WhoAmITalkingTo();
+                TriggerEnterAction();
 
-            if(onConversantUpdated != null) {
-                onConversantUpdated();
+                if (onConversantUpdated != null) {
+                    onConversantUpdated();
+                }
             }
         }
 

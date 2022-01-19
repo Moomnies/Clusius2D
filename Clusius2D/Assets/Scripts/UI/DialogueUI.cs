@@ -39,14 +39,12 @@ namespace RPG.UI
 
             _PlayerConversant.Next();
 
-
             if (!_Choices.activeSelf) 
             {
                 if (!_PlayerConversant.IsChoosing() || !_NextButton.gameObject.activeSelf) {
                     _NextButton.gameObject.SetActive(true);
                 }
-            }           
-                     
+            }               
         }
 
         void UpdateUI()
