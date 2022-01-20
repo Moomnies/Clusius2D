@@ -40,12 +40,19 @@ public class PlayerProfile : MonoBehaviour
     public void LoadPlayer()
     {
         GameDataPlayer data = SaveSystem.LoadPlayer();
+        if (data != null)
+        {
+            namePlayer = data.namePlayer;
+            PreviusLevelExp = data.PreviusLevelExp;
+            totalExp = data.totalExp;
+            PlayerLevel = data.PlayerLevel;
+            totalPlant = data.totalPlant;
+        }
+    }
 
-        namePlayer = data.namePlayer;
-        PreviusLevelExp = data.PreviusLevelExp;
-        totalExp = data.totalExp;
-        PlayerLevel = data.PlayerLevel;
-        totalPlant = data.totalPlant;
+    public void DeleteFiles()
+    {
+        SaveSystem.DeleteFiles();
     }
 
     public void OpenPlayerSettings()

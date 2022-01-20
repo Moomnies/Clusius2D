@@ -27,6 +27,7 @@ public class GameDataTutorial
 
     public GameDataTutorial(Scr_tutorial scr_Tutorial)
     {
-
+        CurrentButton = scr_Tutorial.CurrentButton;
+        tutorial = scr_Tutorial.tutorial;
     }
 }

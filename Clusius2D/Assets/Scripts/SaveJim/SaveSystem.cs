@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public static class SaveSystem 
+public static class SaveSystem
 {
     public static void SavePlayer(PlayerProfile playerProfile)
     {
@@ -18,7 +18,7 @@ public static class SaveSystem
 
     public static GameDataPlayer LoadPlayer()
     {
-        string path = Application.persistentDataPath + "//playerProfile.fun";
+        string path = Application.persistentDataPath + "/playerProfile.fun";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -29,10 +29,49 @@ public static class SaveSystem
 
             return data;
 
-        } else
+        }
+        else
         {
-            Debug.LogError("Ididnot fine file for GameDataPlayer" + path);
+            Debug.LogError("I did not fine file for GameDataPlayer" + path);
             return null;
         }
+    }
+
+    public static void SaveTutorial(Scr_tutorial scr_Tutorial)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/tutorial.fun";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameDataTutorial data = new GameDataTutorial(scr_Tutorial);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static GameDataTutorial LoadTutorial()
+    {
+        string path = Application.persistentDataPath + "/tutorial.fun";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            GameDataTutorial data = formatter.Deserialize(stream) as GameDataTutorial;
+            stream.Close();
+            return data;
+
+        }
+        else
+        {
+            Debug.LogError("I did not fine file for GameDataTutorial" + path);
+            return null;
+        }
+    }
+
+    public static void DeleteFiles()
+    {
+        File.Delete(Application.persistentDataPath + "/tutorial.fun");
+        File.Delete(Application.persistentDataPath + "/playerProfile.fun");
     }
 }
