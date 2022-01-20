@@ -7,8 +7,6 @@ public class GameDataPlayer
     public float PlayerLevel;
     public float totalPlant;
 
-
-
     public GameDataPlayer(PlayerProfile playerProfile)
     {
         namePlayer = playerProfile.namePlayer;
@@ -29,5 +27,15 @@ public class GameDataTutorial
     {
         CurrentButton = scr_Tutorial.CurrentButton;
         tutorial = scr_Tutorial.tutorial;
+    }
+}
+
+[System.Serializable]
+public class GameDataInventory
+{
+
+    public GameDataInventory()
+    {
+       
     }
 }

@@ -69,9 +69,42 @@ public static class SaveSystem
         }
     }
 
+    public static void SaveInventory()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/inventory.fun";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameDataInventory data = new GameDataInventory();
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static GameDataTutorial LoadInventory()
+    {
+        string path = Application.persistentDataPath + "/inventory.fun";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            GameDataInventory data = formatter.Deserialize(stream) as GameDataInventory;
+            stream.Close();
+            return null;
+
+        }
+        else
+        {
+            Debug.LogError("I did not fine file for GameDataInventory" + path);
+            return null;
+        }
+    }
+
     public static void DeleteFiles()
     {
         File.Delete(Application.persistentDataPath + "/tutorial.fun");
         File.Delete(Application.persistentDataPath + "/playerProfile.fun");
+        File.Delete(Application.persistentDataPath + "/inventory.fun");
     }
 }
