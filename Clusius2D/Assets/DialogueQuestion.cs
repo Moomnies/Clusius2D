@@ -43,9 +43,12 @@ public class DialogueQuestion : MonoBehaviour {
         PlayerConversant.StartDialogue(questionDialogues[i]);        
 
         while ((PlayerConversant._CurrentDialogue != null || awnswerIsCorrect == true) && status != null) {
-            
+
+            Debug.Log("DQ: I am here " + awnswerIsCorrect);
+
             if (awnswerIsCorrect) {
-                
+
+                Debug.Log("DQ_B: I am here");
                 status.needFixed();
                 status = null;
             }

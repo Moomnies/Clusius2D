@@ -69,7 +69,9 @@ public class PlantStatus : MonoBehaviour {
         }
     }
 
-    public void needFixed() {        
+    public void needFixed() {
+
+        Debug.Log("PS: I am here");
 
         if (statusUI.activeSelf) {
             statusUI.SetActive(false);
