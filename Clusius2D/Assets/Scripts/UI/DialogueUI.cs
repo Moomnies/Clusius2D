@@ -100,10 +100,8 @@ namespace RPG.UI
                     button.onClick.AddListener(() =>
                     {
                         if (choice.CorrectAnswer) {
-
-                            Debug.Log("D_UI: I am here");
+                            
                             DialogueQuestion.awnswerIsCorrect = true;
-
                         }
 
                         _PlayerConversant.SelectChoice(choice);
