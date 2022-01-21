@@ -1,31 +1,56 @@
 using UnityEngine;
 
-public class scr_tutorial : MonoBehaviour
+public class Scr_tutorial : MonoBehaviour
 {
     [SerializeField] GameObject[] Buttons;
     [SerializeField] GameObject[] Indicators;
-    [SerializeField] int CurrentButton;
+    public int CurrentButton;
     [SerializeField] GameObject Pointer;
     [SerializeField] GameObject indi;
-    [SerializeField] bool tutorial;
+    public bool tutorial;
+
 
     void Start()
     {
-        for (int i = 0; i < Buttons.Length; i++)
+        LoadTutorial();
+        if (tutorial == false)
         {
-            if (CurrentButton < i)
+            for (int i = 0; i < Buttons.Length; i++)
             {
-                Buttons[i].SetActive(false);
-                indi.transform.position = Buttons[0].transform.position;
-                //Indicators[i].SetActive(false);
+                if (CurrentButton < i)
+                {
+                    Buttons[i].SetActive(false);
+                    indi.transform.position = Buttons[0].transform.position;
+                    //Indicators[i].SetActive(false);
+                }
             }
         }
+        else
+        {
+            Debug.Log("tutorial klaar");
+            indi.SetActive(false);
+        }
     }
+    public void SaveTutorial()
+    {
+        SaveSystem.SaveTutorial(this);
+    }
+
+    public void LoadTutorial()
+    {
+        GameDataTutorial data = SaveSystem.LoadTutorial();
+        if (data != null)
+        {
+            CurrentButton = data.CurrentButton;
+            tutorial = data.tutorial;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
 
-        if (CurrentButton < (Buttons.Length ))
+        if (CurrentButton < (Buttons.Length))
         {
             if (Input.touchCount > 0)
             {
@@ -80,8 +105,13 @@ public class scr_tutorial : MonoBehaviour
         }
         else
         {
-            indi.SetActive(false);
-            tutorial = false;
+            if (tutorial == false)
+            {
+                Debug.Log("tutorial klaar");
+                indi.SetActive(false);
+                tutorial = true;
+                SaveTutorial();
+            }
         }
     }
 }
