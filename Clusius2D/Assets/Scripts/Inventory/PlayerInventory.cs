@@ -2,9 +2,7 @@ using Saving;
 using System;
 using UnityEngine;
 
-
-
-public class PlayerInventory : MonoBehaviour, ISaveable
+public class PlayerInventory : MonoBehaviour
 {
     public event Action inventoryUpdated;
 
@@ -16,7 +14,24 @@ public class PlayerInventory : MonoBehaviour, ISaveable
 
     [SerializeField] AudioSource audioSource;
 
+    String[] itemdata;
+
     public int GetSize { get => slots.Length; }
+
+    private void Start() {
+        GameDataInventory data = SaveSystem.LoadInventory();
+        itemdata = data.itemIDs;
+        //SaveSystem.DeleteFiles();
+
+        for (int i = 0; i < data.itemIDs.Length; i++) {
+
+            if(itemdata[i] != null) {
+                slots[i] = Item.GetFromID(data.itemIDs[i]);
+            }
+        }
+
+        inventoryUpdated();
+    }
 
     public static PlayerInventory GetPlayerInventory()
     {
@@ -89,8 +104,7 @@ public class PlayerInventory : MonoBehaviour, ISaveable
     //PRIVATE
     private void Awake()
     {
-        slots = new Item[inventorySize];
-        AddToFirstEmptySlot(testItem);
+        slots = new Item[inventorySize];       
     }
 
     private int FindSlot(Item itemToAdd)
@@ -111,31 +125,9 @@ public class PlayerInventory : MonoBehaviour, ISaveable
         return -1;
     }
 
-    object ISaveable.CaptureState()
-    {
-        var slotStrings = new string[inventorySize];
-        for (int i = 0; i < inventorySize; i++)
-        {
-            if (slots[i] != null)
-            {
-                slotStrings[i] = slots[i].ItemID;
-            }
-        }
+    private void OnApplicationQuit() {
 
-        return slotStrings;
-    }
-
-    void ISaveable.RestoreState(object state)
-    {
-        var slotStrings = (string[])state;
-        for (int i = 0; i < inventorySize; i++)
-        {
-            slots[i] = Item.GetFromID(slotStrings[i]);
-        }
-        if (inventoryUpdated != null)
-        {
-            inventoryUpdated();
-        }
+        SaveSystem.SaveInventory(this);
     }
 }
 
