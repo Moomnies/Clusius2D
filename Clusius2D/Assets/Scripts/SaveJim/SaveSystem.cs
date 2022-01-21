@@ -69,19 +69,19 @@ public static class SaveSystem
         }
     }
 
-    public static void SaveInventory()
+    public static void SaveInventory(PlayerInventory inventory)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/inventory.fun";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameDataInventory data = new GameDataInventory();
+        GameDataInventory data = new GameDataInventory(inventory);
 
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static GameDataTutorial LoadInventory()
+    public static GameDataInventory LoadInventory()
     {
         string path = Application.persistentDataPath + "/inventory.fun";
         if (File.Exists(path))
@@ -91,7 +91,7 @@ public static class SaveSystem
 
             GameDataInventory data = formatter.Deserialize(stream) as GameDataInventory;
             stream.Close();
-            return null;
+            return data;
 
         }
         else
