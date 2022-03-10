@@ -14,6 +14,8 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] AudioSource audioSource;
 
+    [SerializeField] Seed testSeed;
+
     String[] itemdata;
 
     public int GetSize { get => slots.Length; }
@@ -31,6 +33,8 @@ public class PlayerInventory : MonoBehaviour
         }
 
         //inventoryUpdated();
+
+        AddItemToSlot(1, testSeed);
     }
 
     public static PlayerInventory GetPlayerInventory()
