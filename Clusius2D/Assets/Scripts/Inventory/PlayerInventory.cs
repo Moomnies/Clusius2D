@@ -30,7 +30,7 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
-        inventoryUpdated();
+        //inventoryUpdated();
     }
 
     public static PlayerInventory GetPlayerInventory()
