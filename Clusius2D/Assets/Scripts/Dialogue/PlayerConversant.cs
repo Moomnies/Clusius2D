@@ -19,7 +19,7 @@ namespace RPG.Dialogue
 
         private void Start()
         {
-            StartDialogue(_TestDialogue);
+            //StartDialogue(_TestDialogue);
         }
 
         public static void StartDialogue(Dialogue newDIalogue)
